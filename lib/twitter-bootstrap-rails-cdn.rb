@@ -51,7 +51,7 @@ module TwitterBootstrap::Rails::Cdn
       else
         [ stylesheet_link_tag(twitter_bootstrap_stylesheet_url(host, options), html_options),
           javascript_tag("$(function(){ $('body').css('color') === 'rgb(51, 51, 51)' "+
-            "|| $('head').prepend('#{stylesheet_link_tag(local_css, html_options)}'); });")
+            "|| $('head').prepend('#{stylesheet_link_tag(local, html_options)}'); });")
         ].join("\n").html_safe
       end
     end
@@ -60,7 +60,7 @@ module TwitterBootstrap::Rails::Cdn
   class Railtie < Rails::Railtie
     initializer 'twitter_bootstrap_rails_cdn.action_view' do |app|
       ActiveSupport.on_load(:action_view) do
-        include TwitterBoostrap::Rails::Cdn::ActionViewExtensions
+        include TwitterBootstrap::Rails::Cdn::ActionViewExtensions
       end
     end
   end
