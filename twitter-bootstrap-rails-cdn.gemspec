@@ -14,4 +14,5 @@ Gem::Specification.new do |gem|
   gem.name          = "twitter-bootstrap-rails-cdn"
   gem.require_paths = ["lib"]
   gem.version       = TwitterBootstrap::Rails::Cdn::VERSION
+  gem.license       = 'MIT'
 end
