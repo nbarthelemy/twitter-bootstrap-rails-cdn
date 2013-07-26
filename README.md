@@ -45,20 +45,27 @@ If you're using asset pipeline with Rails 3.1+ or 4.+,
 Then in layout:
 
 ```ruby
-= twitter_bootstrap_javascript_include_tag
-= javascript_include_tag 'application' ...
-```
-
-and
-
-```ruby
 = twitter_bootstrap_stylesheet_link_tag
 = stylesheet_link_tag 'application' ...
+```
+
+```ruby
+= twitter_bootstrap_javascript_include_tag
+= javascript_include_tag 'application' ...
 ```
 
 Note that valid CDN symbols are `:netdna`.
 
 Now, it will generate the following on production:
+
+```html
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" media="screen" rel="stylesheet" />
+<script>
+//<![CDATA[
+$(function(){ $('body').css('color') === 'rgb(51, 51, 51)' || $('head').prepend('<link href="/stylesheets/bootstrap-2.3.2-combined.min.css" media="screen" rel="stylesheet" />'); });
+//]]>
+</script>
+```
 
 ```html
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -72,12 +79,16 @@ typeof $().modal == 'function' || document.write(unescape('%3Cscript src="/javas
 on development:
 
 ```html
+<script src="/assets/bootstrap-2.3.2.css?body=1" type="text/javascript"></script>
+```
+
+```html
 <script src="/assets/bootstrap-2.3.2.js?body=1" type="text/javascript"></script>
 ```
 
 If you want to check the production URL, you can pass `force: true` as an option.
 
 ```ruby
-twitter_bootstrap_javascript_include_tag :netdna, force: true
 twitter_bootstrap_stylesheet_link_tag :netdna, force: true
+twitter_bootstrap_javascript_include_tag :netdna, force: true
 ```
