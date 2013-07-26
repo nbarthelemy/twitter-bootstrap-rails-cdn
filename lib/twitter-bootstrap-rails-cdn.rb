@@ -6,21 +6,6 @@ module TwitterBootstrap::Rails::Cdn
     DEFAULT_HOST = :netdna
     BOOTSTRAP_VERSIONS = [ '2.3.2' ]
 
-    def twitter_bootstrap_url(type, host, options = {})
-      version  = options.delete(:version) || BOOTSTRAP_VERSIONS.first
-
-      ext = ''
-      if type == :css
-        ext << '-combined' unless options.delete(:responsive) == false
-      end
-      ext << '.min' unless options.delete(:compressed) == false
-
-      {
-        :netdna => "//netdna.bootstrapcdn.com/twitter-bootstrap/#{version}/#{type}/bootstrap#{ext}.#{type}",
-        :local  => "bootstrap-#{version}#{ext}"
-      }[host]
-    end
-
     def twitter_bootstrap_javascript_url(host = DEFAULT_HOST, options = {})
       twitter_bootstrap_url(:js, host, options)
     end
@@ -54,6 +39,23 @@ module TwitterBootstrap::Rails::Cdn
             "|| $('head').prepend('#{stylesheet_link_tag(local, html_options)}'); });")
         ].join("\n").html_safe
       end
+    end
+
+  private
+
+    def twitter_bootstrap_url(type, host, options = {})
+      version  = options.delete(:version) || BOOTSTRAP_VERSIONS.first
+
+      ext = ''
+      if type == :css
+        ext << '-combined' unless options.delete(:responsive) == false
+      end
+      ext << '.min' unless options.delete(:compressed) == false
+
+      {
+        :netdna => "//netdna.bootstrapcdn.com/twitter-bootstrap/#{version}/#{type}/bootstrap#{ext}.#{type}",
+        :local  => "bootstrap-#{version}#{ext}"
+      }[host]
     end
   end
 

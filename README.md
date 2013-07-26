@@ -1,77 +1,70 @@
-# jquery-rails-cdn
+# twitter-bootstrap-rails-cdn
 
-Add CDN support to [jquery-rails](https://github.com/rails/jquery-rails).
+Twitter Boostrap CDN support for Rails 3 and 4
 
-Serving jQuery from a publicly available [CDN](http://en.wikipedia.org/wiki/Content_Delivery_Network) has clear benefits:
+Serving Bootstrap from a publicly available [CDN](http://en.wikipedia.org/wiki/Content_Delivery_Network) has clear benefits:
 
-* **Speed**: Users will be able to download jQuery from the closest physical location.
-* **Caching**: CDN is used so widely that potentially your users may not need to download jQuery at all.
-* **Parallelism**: Browsers have a limitation on how many connections can be made to a single host. Using CDN for jQuery offloads a big one.
+* **Speed**: Users will be able to download Bootstrap from the closest physical location.
+* **Caching**: CDN is used so widely that potentially your users may not need to download Bootstrap at all.
+* **Parallelism**: Browsers have a limitation on how many connections can be made to a single host. Using CDN for Bootstrap offloads a big one.
 
 ## Features
 
 This gem offers the following features:
 
-* Supports multiple CDN. (Google, Microsoft, jquery.com, etc.)
-* jQuery version is automatically detected via `jquery-rails`.
-* Automatically fallback to jquery-rails' bundled jQuery when:
+* Supports netdna CDN, but other CDNs could be added
+* Bootstrap version is defaulted to the most recent version, but other versions can be specified.
+* Automatically fallback to local copy of Bootstrap when:
   * You're on a development environment, so that you can work offline.
   * The CDN is down or unreachable.
 
-On top of that, if you're using asset pipeline, you may have noticed that the major chunks of the code in combined `application.js` is jQuery. Implications of externalizing jQuery from `application.js` are:
+On top of that, if you're using asset pipeline, you may have noticed that the major chunks of the code in combined `application.js` is Bootstrap. Implications of externalizing Bootstrap from `application.js` are:
 
 * Updating your JS code won't evict the entire cache in browsers.
-  * Cached jQuery in the client browsers will survive deployments.
-  * Your code changes more often than jQuery upgrades, right?
+  * Cached Bootstrap in the client browsers will survive deployments.
+  * Your code changes more often than Bootstrap upgrades, right?
 * `rake assets:precompile` will run faster and use less memory.
-
-Changelog:
-
-* v1.0.0: Options like `defer: true` or `data-turbolinks-eval: false` are allowed to be passed. (Thanks to @mkitt)
-* v0.4.0: Added Cloudflare. (Thanks to @damonmorgan)
-* v0.3.0: Microsoft and Yandex are now always scheme-less. (Thanks to @atipugin)
-* v0.2.1: Use minified version for Yandex. (Thanks to @atipugin)
-* v0.2.0: (Incompatible Change) Google CDN is now always scheme-less. Add Yandex CDN for Russian users. (Thanks to @ai)
-* v0.1.0: Added `:google_schemeless` for sites that support both SSL and non-SSL.
-* v0.0.1: Initial release
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jquery-rails-cdn'
+gem 'twitter-bootstrap-rails-cdn'
 ```
 
 ## Usage
 
-This gem adds two methods `jquery_include_tag` and `jquery_url`.
+This gem adds a few methods methods `twitter_bootstrap_javascript_include_tag`, `twitter_bootstrap_javascript_url`,
+`twitter_bootstrap_stylesheet_link_tag` and `twitter_bootstrap_stylesheet_url`.
 
-If you're using asset pipeline with Rails 3.1+,
+If you're using asset pipeline with Rails 3.1+ or 4.+,
 
-- Remove `//= require jquery` from `application.js`.
-- Put the following line in `config/application.rb`, so that jquery.js will be served from your server when CDN is not available.
-
-```ruby
-config.assets.precompile += ['jquery.js']
-```
+- Remove any references to bootstrap from `application.js`.
 
 Then in layout:
 
 ```ruby
-= jquery_include_tag :google
-= javascript_include_tag 'application'
+= twitter_bootstrap_javascript_include_tag
+= javascript_include_tag 'application' ...
 ```
 
-Note that valid CDN symbols are `:google`, `:microsoft`, `:jquery`, `:cloudflare` and `:yandex`.
+and
+
+```ruby
+= twitter_bootstrap_stylesheet_link_tag
+= stylesheet_link_tag 'application' ...
+```
+
+Note that valid CDN symbols are `:netdna`.
 
 Now, it will generate the following on production:
 
 ```html
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script>
 //<![CDATA[
-window.jQuery || document.write(unescape('%3Cscript src="/assets/jquery-3aaa3fa0b0207a1abcd30555987cd4cc.js" type="text/javascript">%3C/script>'))
+typeof $().modal == 'function' || document.write(unescape('%3Cscript src="/javascripts/bootstrap-2.3.2.min.js">%3C/script>'))
 //]]>
 </script>
 ```
@@ -79,11 +72,12 @@ window.jQuery || document.write(unescape('%3Cscript src="/assets/jquery-3aaa3fa0
 on development:
 
 ```html
-<script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-2.3.2.js?body=1" type="text/javascript"></script>
 ```
 
-If you want to check the production URL, you can pass `:force => true` as an option.
+If you want to check the production URL, you can pass `force: true` as an option.
 
 ```ruby
-jquery_include_tag :google, :force => true
+twitter_bootstrap_javascript_include_tag :netdna, force: true
+twitter_bootstrap_stylesheet_link_tag :netdna, force: true
 ```
