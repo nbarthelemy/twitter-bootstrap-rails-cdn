@@ -2,6 +2,8 @@
 
 Twitter Boostrap CDN support for Rails 3 and 4
 
+*See below for details on using the new 3.0.0-RC1 version of bootstrap.*
+
 Serving Bootstrap from a publicly available [CDN](http://en.wikipedia.org/wiki/Content_Delivery_Network) has clear benefits:
 
 * **Speed**: Users will be able to download Bootstrap from the closest physical location.
@@ -91,6 +93,13 @@ If you want to check the production URL, you can pass `force: true` as an option
 ```ruby
 twitter_bootstrap_stylesheet_link_tag :netdna, force: true
 twitter_bootstrap_javascript_include_tag :netdna, force: true
+```
+
+The default Bootstrap version will be 2.3.2 until the final release of 3.0.0, until then to use 3.0.0-RC1 just set the version in the options and force the use of a CDN in development.
+
+```ruby
+twitter_bootstrap_stylesheet_link_tag :netdna, force: true, version: '3.0.0-RC1'
+twitter_bootstrap_javascript_include_tag :netdna, force: true, version: '3.0.0-RC1'
 ```
 
 ## License
