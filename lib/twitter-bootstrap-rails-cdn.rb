@@ -17,7 +17,7 @@ module TwitterBootstrap::Rails::Cdn
     def twitter_bootstrap_javascript_include_tag(host, options = {}, html_options = {})
       local = twitter_bootstrap_javascript_url(:local, options)
 
-      if OFFLINE and !options.delete(:force)
+      if OFFLINE and !options[:force]
         javascript_include_tag(local, html_options)
       else
         [ 
@@ -31,8 +31,8 @@ module TwitterBootstrap::Rails::Cdn
     def twitter_bootstrap_stylesheet_include_tag(host, options = {}, html_options = {})
       local = twitter_bootstrap_stylesheet_url(:local, options)
 
-      if OFFLINE and !options.delete(:force)
-        stylesheet_link_tag(local, options)
+      if OFFLINE and !options[:force]
+        stylesheet_link_tag(local, html_options)
       else
         [ stylesheet_link_tag(twitter_bootstrap_stylesheet_url(host, options), html_options),
           javascript_tag("$(function(){ $('body').css('color') === 'rgb(51, 51, 51)' "+
@@ -44,13 +44,13 @@ module TwitterBootstrap::Rails::Cdn
   private
 
     def twitter_bootstrap_url(type, host, options = {})
-      version  = options.delete(:version) || BOOTSTRAP_VERSIONS.first
+      version  = options[:version] || BOOTSTRAP_VERSIONS.first
 
       ext = ''
       if type == :css
-        ext << '-combined' unless options.delete(:responsive) == false
+        ext << '-combined' unless options[:responsive] == false
       end
-      ext << '.min' unless options.delete(:compressed) == false
+      ext << '.min' unless options[:compressed] == false
 
       {
         :netdna => "//netdna.bootstrapcdn.com/twitter-bootstrap/#{version}/#{type}/bootstrap#{ext}.#{type}",
