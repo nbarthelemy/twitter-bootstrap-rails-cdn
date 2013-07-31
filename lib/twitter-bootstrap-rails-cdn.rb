@@ -34,10 +34,7 @@ module TwitterBootstrap::Rails::Cdn
       if OFFLINE and !options[:force]
         stylesheet_link_tag(local, html_options)
       else
-        [ stylesheet_link_tag(twitter_bootstrap_stylesheet_url(host, options), html_options),
-          javascript_tag("$(function(){ $('body').css('color') === 'rgb(51, 51, 51)' "+
-            "|| $('head').prepend('#{stylesheet_link_tag(local, html_options)}'); });")
-        ].join("\n").html_safe
+        stylesheet_link_tag(twitter_bootstrap_stylesheet_url(host, options), html_options)
       end
     end
 
