@@ -43,13 +43,14 @@ module TwitterBootstrap::Rails::Cdn
     def twitter_bootstrap_url(type, host, options = {})
       version  = options[:version] || BOOTSTRAP_VERSIONS.first
 
-      ext = '', prefix = 'twitter-bootstrap'
+      prefix = 'twitter-bootstrap'
+      prefix = 'bootstrap' if version == '3.0.0-rc1'
+
+      ext = ''
       if type == :css && version != '3.0.0-rc1'
         ext << '-combined' unless options[:responsive] == false
       end
       ext << '.min' unless options[:compressed] == false
-
-      prefix = 'bootstrap' if version == '3.0.0-rc1'
 
       {
         :netdna => "//netdna.bootstrapcdn.com/#{prefix}/#{version}/#{type}/bootstrap#{ext}.#{type}",
