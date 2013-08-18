@@ -42,12 +42,13 @@ module TwitterBootstrap::Rails::Cdn
 
     def twitter_bootstrap_url(type, host, options = {})
       version  = options[:version] || BOOTSTRAP_VERSIONS.first
+      is_v3 = !!version.match(/^3/)
 
       prefix = 'twitter-bootstrap'
-      prefix = 'bootstrap' if version == '3.0.0-rc1'
+      prefix = 'bootstrap' if is_v3
 
       ext = ''
-      if type == :css && version != '3.0.0-rc1'
+      if type == :css && !is_v3
         ext << '-combined' unless options[:responsive] == false
       end
       ext << '.min' unless options[:compressed] == false
