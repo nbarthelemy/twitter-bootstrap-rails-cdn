@@ -1,7 +1,7 @@
 module TwitterBootstrap
   module Rails
     module Cdn
-      VERSION = '1.0.7'
+      VERSION = '1.1.0'
     end
   end
 end
