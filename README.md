@@ -62,11 +62,6 @@ Now, it will generate the following on production:
 
 ```html
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" media="screen" rel="stylesheet" />
-<script>
-//<![CDATA[
-$(function(){ $('body').css('color') === 'rgb(51, 51, 51)' || $('head').prepend('<link href="/stylesheets/bootstrap-3.0.0.min.css" media="screen" rel="stylesheet" />'); });
-//]]>
-</script>
 ```
 
 ```html
