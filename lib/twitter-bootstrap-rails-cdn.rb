@@ -28,7 +28,7 @@ module TwitterBootstrap::Rails::Cdn
       end
     end
 
-    def twitter_bootstrap_stylesheet_include_tag(host, options = {}, html_options = {})
+    def twitter_bootstrap_stylesheet_link_tag(host, options = {}, html_options = {})
       local = twitter_bootstrap_stylesheet_url(:local, options)
 
       if OFFLINE and !options[:force]
