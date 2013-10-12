@@ -1,4 +1,8 @@
-module TwitterBootstrap::Rails::Cdn
-  class Engine < ::Rails::Engine
+module TwitterBootstrap
+  module Rails
+    module Cdn
+      class Engine < ::Rails::Engine
+      end
+    end
   end
 end
