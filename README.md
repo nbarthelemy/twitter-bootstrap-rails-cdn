@@ -47,16 +47,16 @@ If you're using asset pipeline with Rails 3.1+ or 4.+,
 Then in layout:
 
 ```ruby
-= twitter_bootstrap_stylesheet_link_tag
+= twitter_bootstrap_stylesheet_link_tag :netdna
 = stylesheet_link_tag 'application' ...
 ```
 
 ```ruby
-= twitter_bootstrap_javascript_include_tag
+= twitter_bootstrap_javascript_include_tag :netdna
 = javascript_include_tag 'application' ...
 ```
 
-Note that valid CDN symbols are `:netdna`.
+Note that currently, the only valid CDN symbol is `:netdna`, and this must be passed to tag methods.
 
 Now, it will generate the following on production:
 
