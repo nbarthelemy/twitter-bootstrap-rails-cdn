@@ -1,4 +1,4 @@
-require 'twitter-bootstrap-rails-cdn/engine' if ::Rails.version >= 3.1
+require 'twitter-bootstrap-rails-cdn/engine' if ::Rails.version >= '3.1'
 require 'twitter-bootstrap-rails-cdn/railtie'
 require 'twitter-bootstrap-rails-cdn/version'
 
