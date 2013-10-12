@@ -1,8 +1,10 @@
+require 'twitter-bootstrap-rails-cdn/engine' if ::Rails.version >= 3.1
+require 'twitter-bootstrap-rails-cdn/railtie'
 require 'twitter-bootstrap-rails-cdn/version'
 
 module TwitterBootstrap::Rails::Cdn
   module ActionViewExtensions
-    OFFLINE = ( Rails.env.development? or Rails.env.test? )
+    OFFLINE = ( ::Rails.env.development? or ::Rails.env.test? )
     DEFAULT_HOST = :netdna
     BOOTSTRAP_VERSIONS = [ '3.0.0', '2.3.2' ]
 
@@ -57,14 +59,6 @@ module TwitterBootstrap::Rails::Cdn
         :netdna => "//netdna.bootstrapcdn.com/#{prefix}/#{version}/#{type}/bootstrap#{ext}.#{type}",
         :local  => "bootstrap-#{version}#{ext}"
       }[host]
-    end
-  end
-
-  class Railtie < Rails::Railtie
-    initializer 'twitter_bootstrap_rails_cdn.action_view' do |app|
-      ActiveSupport.on_load(:action_view) do
-        include TwitterBootstrap::Rails::Cdn::ActionViewExtensions
-      end
     end
   end
 end
