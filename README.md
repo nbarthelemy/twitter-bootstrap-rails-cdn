@@ -61,14 +61,14 @@ Note that currently, the only valid CDN symbol is `:netdna`, and this must be pa
 Now, it will generate the following on production:
 
 ```html
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" media="screen" rel="stylesheet" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen" rel="stylesheet" />
 ```
 
 ```html
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
 //<![CDATA[
-typeof $().modal == 'function' || document.write(unescape('%3Cscript src="/javascripts/bootstrap-3.0.0.min.js">%3C/script>'))
+typeof $().modal == 'function' || document.write(unescape('%3Cscript src="/javascripts/bootstrap-3.3.5.min.js">%3C/script>'))
 //]]>
 </script>
 ```
@@ -76,11 +76,11 @@ typeof $().modal == 'function' || document.write(unescape('%3Cscript src="/javas
 on development:
 
 ```html
-<script src="/assets/bootstrap-3.0.0.css?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-3.3.5.css?body=1" type="text/javascript"></script>
 ```
 
 ```html
-<script src="/assets/bootstrap-3.0.0.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-3.3.5.js?body=1" type="text/javascript"></script>
 ```
 
 If you want to check the production URL, you can pass `force: true` as an option.
@@ -90,7 +90,7 @@ twitter_bootstrap_stylesheet_link_tag :netdna, force: true
 twitter_bootstrap_javascript_include_tag :netdna, force: true
 ```
 
-The default Bootstrap version is now 3.0.0. If you want to use 2.3.2 just set the version in the options and force the use of a CDN in development.
+The default Bootstrap version is now 3.3.5. If you want to use 2.3.2 just set the version in the options and force the use of a CDN in development.
 
 ```ruby
 twitter_bootstrap_stylesheet_link_tag :netdna, force: true, version: '2.3.2'
