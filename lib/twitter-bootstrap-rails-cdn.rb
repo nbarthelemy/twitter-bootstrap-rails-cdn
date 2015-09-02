@@ -6,7 +6,7 @@ module TwitterBootstrap::Rails::Cdn
   module ActionViewExtensions
     OFFLINE = ( ::Rails.env.development? or ::Rails.env.test? )
     DEFAULT_HOST = :netdna
-    BOOTSTRAP_VERSIONS = [ '3.0.0', '2.3.2' ]
+    BOOTSTRAP_VERSIONS = [ '3.3.5', '3.0.0', '2.3.2' ]
 
     def twitter_bootstrap_javascript_url(host = DEFAULT_HOST, options = {})
       twitter_bootstrap_url(:js, host, options)
@@ -22,7 +22,7 @@ module TwitterBootstrap::Rails::Cdn
       if OFFLINE and !options[:force]
         javascript_include_tag(local, html_options)
       else
-        [ 
+        [
           javascript_include_tag(twitter_bootstrap_javascript_url(host, options), html_options),
           javascript_tag("typeof $().modal == 'function' "+
             "|| document.write(unescape('#{javascript_include_tag(local, html_options).gsub('<','%3C')}'))")
